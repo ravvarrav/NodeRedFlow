@@ -1,0 +1,342 @@
+[
+    {
+        "id": "d69c4e02.173f6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4d0133e7.67a06c",
+        "type": "http request",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 550,
+        "y": 100,
+        "wires": [
+            [
+                "1b08646b.2eac3c"
+            ]
+        ]
+    },
+    {
+        "id": "c4d14368.86658",
+        "type": "function",
+        "z": "d69c4e02.173f6",
+        "name": "setWebhook",
+        "func": "msg.webhookURL = msg.payload.webhookURL + \"/webhook\"\nmsg.url = \"https://api.telegram.org/bot977990381:AAF2wsS_ZtiWZEgN-bmjMNLos-W-p2K5_gM/setWebhook?url=\" + msg.webhookURL\nmsg.method = \"POST\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "4d0133e7.67a06c"
+            ]
+        ]
+    },
+    {
+        "id": "f34e3a1f.bd9368",
+        "type": "http in",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "url": "/setWebhook",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "c4d14368.86658"
+            ]
+        ]
+    },
+    {
+        "id": "1b08646b.2eac3c",
+        "type": "http response",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7061570a.d896a8",
+        "type": "http in",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "url": "/webhook",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "ae7a7123.312cd"
+            ]
+        ]
+    },
+    {
+        "id": "77324160.b366f",
+        "type": "comment",
+        "z": "d69c4e02.173f6",
+        "name": "IncomingEvents",
+        "info": "Все входящие ивенты от TG",
+        "x": 180,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2a36ce68.7676e2",
+        "type": "comment",
+        "z": "d69c4e02.173f6",
+        "name": "setWebhook",
+        "info": "-url https://{{host}}/setWebhook\n-POST\n-body : {\n    \"webhookURL\" - `{{host}}`\n}",
+        "x": 170,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ae7a7123.312cd",
+        "type": "http response",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 360,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ed71558c.6b7cd8",
+        "type": "comment",
+        "z": "d69c4e02.173f6",
+        "name": "/sendMessage",
+        "info": "-url https://{{host}}/sendMessage\n-POST\nbody : {\n    \"chatId\": `chatId`,\n    \"messageId\": `messageId`\n}",
+        "x": 180,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d73e03bc.03878",
+        "type": "http in",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "url": "/sendMessage",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "78acf961.3ebb18"
+            ]
+        ]
+    },
+    {
+        "id": "13410939.861787",
+        "type": "switch",
+        "z": "d69c4e02.173f6",
+        "name": "messageId",
+        "property": "messageId",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "4b02bb29.b9a8d4"
+            ],
+            [
+                "acca838a.86d6c"
+            ],
+            [
+                "5bea3852.2f7198"
+            ],
+            [
+                "18f7bd3a.d8da13"
+            ]
+        ]
+    },
+    {
+        "id": "4b02bb29.b9a8d4",
+        "type": "function",
+        "z": "d69c4e02.173f6",
+        "name": "messageId1",
+        "func": "msg.payload = {\n        \"chat_id\": msg.chatId,\n        \"text\": \"Шаблон текстового сообщения №1\"\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 320,
+        "wires": [
+            [
+                "5073a7ea.ee20e8"
+            ]
+        ]
+    },
+    {
+        "id": "acca838a.86d6c",
+        "type": "function",
+        "z": "d69c4e02.173f6",
+        "name": "messageId2",
+        "func": "msg.payload = {\n        \"chat_id\": msg.chatId,\n        \"text\": \"Шаблон текстового сообщения №2\"\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 360,
+        "wires": [
+            [
+                "5073a7ea.ee20e8"
+            ]
+        ]
+    },
+    {
+        "id": "5bea3852.2f7198",
+        "type": "function",
+        "z": "d69c4e02.173f6",
+        "name": "messageId3",
+        "func": "msg.payload = {\n        \"chat_id\": msg.chatId,\n        \"text\": \"Шаблон текстового сообщения №3\"\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 400,
+        "wires": [
+            [
+                "5073a7ea.ee20e8"
+            ]
+        ]
+    },
+    {
+        "id": "18f7bd3a.d8da13",
+        "type": "function",
+        "z": "d69c4e02.173f6",
+        "name": "messageId4",
+        "func": "msg.payload = {\n        \"chat_id\": msg.chatId,\n        \"text\": \"Шаблон текстового сообщения №4\"\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "5073a7ea.ee20e8"
+            ]
+        ]
+    },
+    {
+        "id": "5073a7ea.ee20e8",
+        "type": "http request",
+        "z": "d69c4e02.173f6",
+        "name": "sendMessage",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1070,
+        "y": 380,
+        "wires": [
+            [
+                "8cb2213e.537df"
+            ]
+        ]
+    },
+    {
+        "id": "78acf961.3ebb18",
+        "type": "change",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "chatId",
+                "pt": "msg",
+                "to": "payload.chatId",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "messageId",
+                "pt": "msg",
+                "to": "payload.messageId",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "POST",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://api.telegram.org/bot977990381:AAF2wsS_ZtiWZEgN-bmjMNLos-W-p2K5_gM/sendMessage",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "13410939.861787"
+            ]
+        ]
+    },
+    {
+        "id": "8cb2213e.537df",
+        "type": "http response",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1230,
+        "y": 380,
+        "wires": []
+    }
+]
