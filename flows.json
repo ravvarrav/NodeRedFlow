@@ -32,7 +32,7 @@
         "type": "function",
         "z": "d69c4e02.173f6",
         "name": "setWebhook",
-        "func": "msg.webhookURL = msg.payload.webhookURL + \"/webhook\"\nmsg.url = \"https://api.telegram.org/bot977990381:AAF2wsS_ZtiWZEgN-bmjMNLos-W-p2K5_gM/setWebhook?url=\" + msg.webhookURL\nmsg.method = \"POST\"\nreturn msg;",
+        "func": "msg.webhookURL = msg.payload.webhookURL + \"/webhook\"\nmsg.url = \"https://api.telegram.org/bot1028473299:AAGCeORIMFTkD_5Z6lXeMOJkTcY7tlhJEj8/setWebhook?url=\" + msg.webhookURL\nmsg.method = \"POST\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 380,
@@ -311,7 +311,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "https://api.telegram.org/bot977990381:AAF2wsS_ZtiWZEgN-bmjMNLos-W-p2K5_gM/sendMessage",
+                "to": "https://api.telegram.org/bot1028473299:AAGCeORIMFTkD_5Z6lXeMOJkTcY7tlhJEj8/sendMessage",
                 "tot": "str"
             }
         ],
