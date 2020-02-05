@@ -84,7 +84,9 @@
         "y": 240,
         "wires": [
             [
-                "ae7a7123.312cd"
+                "ae7a7123.312cd",
+                "db68b4e1.77b788",
+                "b193cada.b99408"
             ]
         ]
     },
@@ -115,8 +117,8 @@
         "name": "",
         "statusCode": "200",
         "headers": {},
-        "x": 360,
-        "y": 240,
+        "x": 280,
+        "y": 280,
         "wires": []
     },
     {
@@ -142,7 +144,8 @@
         "y": 380,
         "wires": [
             [
-                "78acf961.3ebb18"
+                "78acf961.3ebb18",
+                "569be604.680528"
             ]
         ]
     },
@@ -275,9 +278,7 @@
         "x": 1070,
         "y": 380,
         "wires": [
-            [
-                "8cb2213e.537df"
-            ]
+            []
         ]
     },
     {
@@ -329,14 +330,89 @@
         ]
     },
     {
-        "id": "8cb2213e.537df",
+        "id": "db68b4e1.77b788",
+        "type": "debug",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 380,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b193cada.b99408",
+        "type": "switch",
+        "z": "d69c4e02.173f6",
+        "name": "",
+        "property": "payload.message.text",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "?",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 240,
+        "wires": [
+            [
+                "5a396365.236bbc"
+            ]
+        ]
+    },
+    {
+        "id": "5a396365.236bbc",
+        "type": "function",
+        "z": "d69c4e02.173f6",
+        "name": "send chatId",
+        "func": "msg.url = \"https://api.telegram.org/bot1028473299:AAGCeORIMFTkD_5Z6lXeMOJkTcY7tlhJEj8/sendMessage\"\nmsg.method = \"POST\"\nmsg.payload = {\n        \"chat_id\": msg.payload.message.chat.id,\n        \"text\": msg.payload.message.chat.id\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 240,
+        "wires": [
+            [
+                "8751858b.114208"
+            ]
+        ]
+    },
+    {
+        "id": "8751858b.114208",
+        "type": "http request",
+        "z": "d69c4e02.173f6",
+        "name": "sendMessage",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 780,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "569be604.680528",
         "type": "http response",
         "z": "d69c4e02.173f6",
         "name": "",
-        "statusCode": "",
+        "statusCode": "200",
         "headers": {},
-        "x": 1230,
-        "y": 380,
+        "x": 320,
+        "y": 440,
         "wires": []
     }
 ]
