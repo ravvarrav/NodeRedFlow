@@ -2,16 +2,16 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /usr/local/lib/node_modules/node-red
+    destination: /usr/lib/node_modules/node-red
 hooks:
   BeforeInstall:
     - location: scripts/beforeinstall.sh
       timeout: 300
       runas: root
-  AfterInstall:
-    - location: scripts/afterinstall.sh
-      timeout: 300
-      runas: root
+#   AfterInstall:
+#     - location: scripts/afterinstall.sh
+#       timeout: 300
+#       runas: root
 #   ApplicationStart:
 #     - location: scripts/applicationstart.sh
 #       timeout: 300
