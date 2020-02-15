@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /usr/lib/node_modules/node-red-project
+    destination: /usr/lib/node_modules/node-red
 hooks:
   BeforeInstall:
     - location: scripts/beforeinstall.sh
